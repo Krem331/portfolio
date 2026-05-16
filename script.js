@@ -6,11 +6,11 @@
 
   // Each ball: physics state + scatter direction
   const DIRS = [
-    { ax:  1.0, ay: -1.2 }, // ig  — up-right
-    { ax:  1.3, ay: -0.5 }, // tt  — right, slight up
-    { ax:  1.4, ay:  0.1 }, // yt  — straight right
-    { ax:  1.1, ay:  0.8 }, // fb  — right-down
-    { ax:  0.8, ay:  1.4 }, // li  — down-right
+    { ax: -1.4, ay: -1.6 }, // ig  — up-left
+    { ax:  1.5, ay: -1.2 }, // tt  — up-right
+    { ax: -1.8, ay:  0.2 }, // yt  — left
+    { ax:  1.3, ay:  1.5 }, // fb  — down-right
+    { ax: -1.1, ay:  1.8 }, // li  — down-left
   ];
 
   const states = balls.map((_, i) => ({
@@ -141,6 +141,35 @@ const counterObs = new IntersectionObserver((entries) => {
 
 const statsEl = document.querySelector('.about-stats');
 if (statsEl) counterObs.observe(statsEl);
+
+// ===== VIDEO CAROUSEL =====
+(function () {
+  const track = document.getElementById('videosTrack');
+  const prev  = document.getElementById('videoPrev');
+  const next  = document.getElementById('videoNext');
+  if (!track || !prev || !next) return;
+
+  let index = 0;
+
+  function cardWidth() {
+    const card = track.querySelector('.video-wrap');
+    if (!card) return 0;
+    return card.getBoundingClientRect().width + 20; // 20 = gap in px (1.25rem)
+  }
+
+  function update() {
+    const max = track.children.length - 1;
+    index = Math.max(0, Math.min(index, max));
+    track.style.transform = `translateX(-${index * cardWidth()}px)`;
+    prev.style.opacity = index === 0 ? '0.35' : '1';
+    next.style.opacity = index >= max ? '0.35' : '1';
+  }
+
+  prev.addEventListener('click', () => { index--; update(); });
+  next.addEventListener('click', () => { index++; update(); });
+  window.addEventListener('resize', update);
+  update();
+})();
 
 // ===== CONTACT FORM =====
 document.getElementById('contactForm').addEventListener('submit', function(e) {
