@@ -481,15 +481,6 @@
       }, { passive: true });
     })();
 
-    function arrayBufferToBase64(buffer) {
-      let binary = '';
-      const bytes = new Uint8Array(buffer);
-      for (let i = 0; i < bytes.length; i += 8192) {
-        binary += String.fromCharCode(...bytes.subarray(i, i + 8192));
-      }
-      return btoa(binary);
-    }
-
     document.getElementById('hookForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const btn = this.querySelector('.btn-email');
@@ -500,13 +491,9 @@
       btn.disabled = true;
 
       try {
-        const res = await fetch('/pdf%20folder/pdf_de.pdf');
-        const buffer = await res.arrayBuffer();
-        const base64 = arrayBufferToBase64(buffer);
-
         await emailjs.send('service_rt7w6fh', 'template_5wnhne5', {
           to_email: email,
-          attachment: 'data:application/pdf;base64,' + base64
+          pdf_link: 'https://krem33.netlify.app/pdf%20folder/pdf_de.pdf'
         });
 
         btn.textContent = '✓ Schau in dein Postfach!';
