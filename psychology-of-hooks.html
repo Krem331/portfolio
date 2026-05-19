@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Psychology of Hooks — Viral Hooks</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,700;0,900;1,900&display=swap" rel="stylesheet" />
+  <style>
+
+    /* ===== HERO ===== */
+    .psych-hero {
+      padding: 8rem 0 5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .psych-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .psych-hero-tag {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+    }
+    .psych-hero-heading {
+      font-size: clamp(2.6rem, 5.5vw, 5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -2px;
+      color: #fff;
+      margin-bottom: 1.2rem;
+    }
+    .psych-hero-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+    }
+    .psych-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 2rem;
+    }
+    .psych-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .psych-stat-label {
+      font-size: 0.56rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .psych-stat-icon {
+      color: var(--muted);
+      opacity: 0.5;
+      margin-bottom: 0.4rem;
+    }
+    .psych-stat-val {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .psych-stat-val.accent { color: var(--accent); }
+    .psych-hero-img img {
+      width: 100%;
+      border-radius: 20px;
+      display: block;
+    }
+
+    /* ===== SCROLL ENG ===== */
+    .scroll-section {
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .scroll-section img {
+      width: 100%;
+      border-radius: 20px;
+      display: block;
+    }
+
+    /* ===== HOOK 01 SECTION ===== */
+    .hook-section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .hook-main-layout {
+      display: grid;
+      grid-template-columns: 185px 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .hook-examples-col {
+      grid-column: 1 / -1;
+    }
+
+    /* --- Sidebar --- */
+    .hook-sidebar {
+      position: sticky;
+      top: 6rem;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .hook-sidebar.sidebar-hidden {
+      opacity: 0;
+      transform: translateX(-16px);
+      pointer-events: none;
+    }
+    .hook-sidebar-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hook-sidebar-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .hook-sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.65rem 0.8rem;
+      border-radius: 10px;
+      cursor: default;
+      transition: background 0.2s;
+    }
+    .hook-sidebar-item.active {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid var(--border);
+    }
+    .hook-sidebar-item.locked {
+      opacity: 0.35;
+      filter: blur(4px);
+      pointer-events: none;
+      user-select: none;
+    }
+    .hook-sidebar-num {
+      font-size: 0.62rem;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+      width: 18px;
+    }
+    .hook-sidebar-name {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+    .hook-sidebar-wave {
+      margin-left: auto;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* --- Main content col --- */
+    .hook-content-col {}
+    .hook-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .hook-num {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .hook-tag-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hook-title {
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      color: #fff;
+      line-height: 1.0;
+      margin-bottom: 1rem;
+    }
+    .hook-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 1.8rem;
+    }
+    .hook-content-col img {
+      width: 100%;
+      border-radius: 16px;
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+
+    /* --- Examples col --- */
+    .hook-examples-col img {
+      width: 100%;
+      border-radius: 16px;
+      display: block;
+    }
+
+    /* ===== LOCKED HOOKS ===== */
+    .locked-section {
+      padding: 5rem 0;
+    }
+    .locked-intro {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .locked-intro h2 {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: #fff;
+      margin-bottom: 0.8rem;
+    }
+    .locked-intro p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .locked-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .locked-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.4rem;
+      position: relative;
+      filter: blur(5px);
+      opacity: 0.4;
+      user-select: none;
+      pointer-events: none;
+    }
+    .locked-card-num {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .locked-card-title {
+      font-size: 1rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
+    .locked-card-desc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .lock-icon-wrap {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    /* ===== EMAIL CAPTURE ===== */
+    .email-capture {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 3.5rem 3rem;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .email-capture::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(ellipse, rgba(80,120,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .email-capture-tag {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      position: relative;
+    }
+    .email-capture h3 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: #fff;
+      margin-bottom: 0.8rem;
+      line-height: 1.15;
+      position: relative;
+    }
+    .email-capture p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      line-height: 1.65;
+      position: relative;
+    }
+    .email-form {
+      display: flex;
+      gap: 0.6rem;
+      position: relative;
+    }
+    .email-input {
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.85rem 1.4rem;
+      font-size: 0.88rem;
+      color: #fff;
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .email-input::placeholder { color: rgba(255,255,255,0.3); }
+    .email-input:focus { border-color: rgba(100,140,255,0.5); }
+    .btn-email {
+      background: #fff;
+      color: #000;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0.85rem 1.6rem;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .btn-email:hover { opacity: 0.85; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) {
+      .hook-main-layout {
+        grid-template-columns: 160px 1fr;
+        gap: 2rem;
+      }
+    }
+    @media (max-width: 900px) {
+      .psych-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .hook-main-layout {
+        grid-template-columns: 1fr;
+      }
+      .hook-sidebar {
+        position: static;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+      }
+      .hook-sidebar-label {
+        width: 100%;
+        border-bottom: none;
+        margin-bottom: 0.2rem;
+      }
+      .hook-sidebar-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+      .hook-sidebar-item {
+        padding: 0.4rem 0.7rem;
+      }
+      .hook-sidebar-item.locked { display: none; }
+      .locked-grid { grid-template-columns: repeat(2, 1fr); }
+      .email-form { flex-direction: column; }
+      .email-capture { padding: 2.5rem 1.5rem; }
+    }
+    @media (max-width: 540px) {
+      .psych-stats { grid-template-columns: 1fr 1fr; }
+      .locked-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo" aria-label="Home">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 5c0-1.1.9-2 2-2h1a2 2 0 012 2v6a6 6 0 0012 0V5a2 2 0 012-2h1a2 2 0 012 2"/>
+        <path d="M12 17v4M8 21h8"/>
+      </svg>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="de/psychology-of-hooks.html" class="lang-btn">DE</a></li>
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="index.html#services" class="nav-link">Services</a></li>
+      <li><a href="psychology-of-hooks.html" class="nav-link active">The Psychology of Hooks</a></li>
+      <li><a href="ai-automation.html" class="nav-link">AI Automation</a></li>
+      <li><a href="index.html#static-ads" class="nav-link">Static Ads</a></li>
+      <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ① HERO — text left · pattern1 right -->
+  <section class="psych-hero">
+    <div class="container">
+      <div class="psych-hero-grid">
+
+        <!-- Left: heading + stats -->
+        <div class="psych-hero-left">
+          <p class="psych-hero-tag">Psychology of Hooks</p>
+          <h1 class="psych-hero-heading">THE PSYCHOLOGY<br/>OF ATTENTION</h1>
+          <p class="psych-hero-sub">Breakdown of the psychological mechanisms behind high-performing social media hooks. The first 3 seconds decide whether you get ignored — or go viral.</p>
+
+        </div>
+
+        <!-- RIGHT: scroll1-eng banner -->
+        <div style="padding-top:4.5rem;">
+          <img src="website elements/scroll1-eng.png" alt="Scroll Speed Stats" style="width:100%; border-radius:16px; display:block;" />
+        </div>
+
+      </div>
+    </div>
+
+    <!-- THE GOAL + grafik + formula — full width below heading -->
+    <div class="container">
+      <div style="display:grid; grid-template-columns:1fr 2fr; gap:2rem; align-items:start; margin:3rem 0 3rem;">
+        <div>
+          <p style="font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-bottom:1.2rem;">THE GOAL</p>
+          <p style="font-size:1rem; color:#fff; font-weight:700; line-height:1.6; margin-bottom:1rem;">Get the viewer to stay for at least 3 seconds.</p>
+          <p style="font-size:0.88rem; color:var(--muted); line-height:1.7; margin-bottom:2rem;">After that, retention rate increases dramatically.</p>
+          <img src="website elements/formula1-eng.png" alt="The Formula" style="width:100%; border-radius:16px; display:block;" />
+        </div>
+        <img src="website elements/grafik1-eng.png" alt="Retention Impact chart" style="width:100%; border-radius:16px; display:block;" />
+      </div>
+    </div>
+
+
+  </section>
+
+
+  <!-- ③ HOOK 01 — sidebar · content · examples -->
+  <section class="hook-section">
+    <div class="container">
+      <div class="hook-main-layout">
+
+        <!-- SIDEBAR: hook patterns nav -->
+        <aside class="hook-sidebar">
+          <p class="hook-sidebar-label">Hook Patterns</p>
+          <div class="hook-sidebar-list">
+            <div class="hook-sidebar-item active">
+              <span class="hook-sidebar-num">01</span>
+              <span class="hook-sidebar-name">Pattern Interrupt</span>
+              <svg class="hook-sidebar-wave" width="18" height="14" viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="0,8 3,2 6,14 9,4 12,10 15,1 18,13 21,6 24,8"/></svg>
+            </div>
+            <div class="hook-sidebar-item locked">
+              <span class="hook-sidebar-num">02</span>
+              <span class="hook-sidebar-name">Curiosity Gap</span>
+            </div>
+            <div class="hook-sidebar-item locked">
+              <span class="hook-sidebar-num">03</span>
+              <span class="hook-sidebar-name">Benefit Hook</span>
+            </div>
+            <div class="hook-sidebar-item locked">
+              <span class="hook-sidebar-num">04</span>
+              <span class="hook-sidebar-name">Contrast</span>
+            </div>
+            <div class="hook-sidebar-item locked">
+              <span class="hook-sidebar-num">05</span>
+              <span class="hook-sidebar-name">Story Hook</span>
+            </div>
+            <div class="hook-sidebar-item locked">
+              <span class="hook-sidebar-num">06</span>
+              <span class="hook-sidebar-name">Social Proof</span>
+            </div>
+            <div class="hook-sidebar-item locked">
+              <span class="hook-sidebar-num">07</span>
+              <span class="hook-sidebar-name">Emotional Trigger</span>
+            </div>
+            <div class="hook-sidebar-item locked">
+              <span class="hook-sidebar-num">08</span>
+              <span class="hook-sidebar-name">Open Loop</span>
+            </div>
+          </div>
+        </aside>
+
+        <!-- MAIN CONTENT: title + desc + grafik + formula -->
+        <div class="hook-content-col">
+          <div class="hook-header">
+            <span class="hook-num">01</span>
+            <span class="hook-tag-label">Hook Pattern</span>
+          </div>
+          <h2 class="hook-title">PATTERN<br/>INTERRUPT</h2>
+          <p class="hook-desc">A Pattern Interrupt breaks the viewer's autopilot within the first 1–3 seconds and forces the brain to re-engage. Your brain is wired to look for patterns. When something breaks that pattern, dopamine spikes and attention locks in.</p>
+
+          <img src="website elements/pattern1-eng.png" alt="Pattern Interrupt visualization" />
+        </div>
+
+        <!-- HOW IT WORKS + brain — full width after WAIT banner -->
+        <div class="hook-examples-col">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center;">
+            <div>
+              <p style="font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:1rem;">⊞ HOW IT WORKS</p>
+              <p style="font-size:1.05rem; color:rgba(255,255,255,0.85); line-height:1.75;">Your brain is wired to look for patterns.<br/>When something breaks that pattern,<br/>dopamine spikes and attention locks in.</p>
+            </div>
+            <img src="website elements/brain1-eng.png" alt="Brain — dopamine and attention" style="width:100%; border-radius:16px; display:block;" />
+          </div>
+        </div>
+
+        <!-- EXAMPLES: types + example in action -->
+        <div class="hook-examples-col">
+          <img src="website elements/typesofpattern1-eng.png" alt="Types of Pattern Interrupts and Example in Action" />
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ LOCKED HOOKS + EMAIL CAPTURE -->
+  <section class="locked-section">
+    <div class="container">
+      <div class="locked-intro">
+        <h2>7 More Hook Patterns.<br/>Waiting for you.</h2>
+        <p>Enter your email to get the full breakdown — all 8 hooks, the psychology behind each one, real examples and the formulas that make them work.</p>
+      </div>
+
+      <div class="locked-grid">
+        <div class="locked-card">
+          <div class="locked-card-num">02</div>
+          <div class="locked-card-title">CURIOSITY GAP</div>
+          <div class="locked-card-desc">Create a mental gap between what the viewer knows and what they want to find out.</div>
+          <div class="lock-icon-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        </div>
+        <div class="locked-card">
+          <div class="locked-card-num">03</div>
+          <div class="locked-card-title">BENEFIT HOOK</div>
+          <div class="locked-card-desc">Show the viewer a clear benefit or transformation they will get from watching.</div>
+          <div class="lock-icon-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        </div>
+        <div class="locked-card">
+          <div class="locked-card-num">04</div>
+          <div class="locked-card-title">CONTRAST</div>
+          <div class="locked-card-desc">Highlight a strong difference or contradiction to trigger attention instantly.</div>
+          <div class="lock-icon-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        </div>
+        <div class="locked-card">
+          <div class="locked-card-num">05</div>
+          <div class="locked-card-title">STORY HOOK</div>
+          <div class="locked-card-desc">Start a mini story that creates emotional connection and makes the viewer invested.</div>
+          <div class="lock-icon-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        </div>
+        <div class="locked-card">
+          <div class="locked-card-num">06</div>
+          <div class="locked-card-title">SOCIAL PROOF</div>
+          <div class="locked-card-desc">Show that other people approve, use or trust what you're talking about.</div>
+          <div class="lock-icon-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        </div>
+        <div class="locked-card">
+          <div class="locked-card-num">07</div>
+          <div class="locked-card-title">EMOTIONAL TRIGGER</div>
+          <div class="locked-card-desc">Trigger a strong emotion that drives an immediate reaction.</div>
+          <div class="lock-icon-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        </div>
+        <div class="locked-card">
+          <div class="locked-card-num">08</div>
+          <div class="locked-card-title">OPEN LOOP</div>
+          <div class="locked-card-desc">Start a loop of curiosity that can only be closed by watching more.</div>
+          <div class="lock-icon-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        </div>
+      </div>
+
+      <!-- EMAIL CAPTURE -->
+      <div class="email-capture">
+        <p class="email-capture-tag">Free — Instant Access</p>
+        <h3>Get all 8 Hook Patterns.<br/>For free.</h3>
+        <p>Drop your email and I'll send you the full Psychology of Hooks breakdown — including the formulas, real examples and the science behind each pattern.</p>
+        <form class="email-form" id="hookForm">
+          <input type="email" class="email-input" placeholder="your@email.com" required />
+          <button type="submit" class="btn-email">SEND ME THE HOOKS →</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M3 5c0-1.1.9-2 2-2h1a2 2 0 012 2v6a6 6 0 0012 0V5a2 2 0 012-2h1a2 2 0 012 2"/>
+          <path d="M12 17v4M8 21h8"/>
+        </svg>
+        Viral Hooks
+      </div>
+      <div class="footer-socials">
+        <a href="#" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" aria-label="TikTok">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.77 0 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 000 12.63 6.34 6.34 0 006.33-6.34V8.69a8.28 8.28 0 004.83 1.54V6.78a4.85 4.85 0 01-1.06-.09z"/></svg>
+        </a>
+        <a href="#" aria-label="YouTube">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+        </a>
+      </div>
+      <a href="index.html#contact" class="btn-outline">Let's work together</a>
+      <p class="footer-copy">© 2026 Viral Hooks. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    emailjs.init('Jwa12u8c-zNju-Azn');
+
+    const toggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+    // Hide sidebar after scrolling past 50% of the page
+    (function() {
+      const sidebar = document.querySelector('.hook-sidebar');
+      if (!sidebar) return;
+      window.addEventListener('scroll', () => {
+        const midPage = document.body.scrollHeight / 2;
+        if (window.scrollY > midPage) {
+          sidebar.classList.add('sidebar-hidden');
+        } else {
+          sidebar.classList.remove('sidebar-hidden');
+        }
+      }, { passive: true });
+    })();
+
+    function arrayBufferToBase64(buffer) {
+      let binary = '';
+      const bytes = new Uint8Array(buffer);
+      for (let i = 0; i < bytes.length; i += 8192) {
+        binary += String.fromCharCode(...bytes.subarray(i, i + 8192));
+      }
+      return btoa(binary);
+    }
+
+    document.getElementById('hookForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('.btn-email');
+      const input = this.querySelector('.email-input');
+      const email = input.value;
+
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('/pdf%20folder/pdf_eng.pdf');
+        const buffer = await res.arrayBuffer();
+        const base64 = arrayBufferToBase64(buffer);
+
+        await emailjs.send('service_rt7w6fh', 'template_5wnhne5', {
+          to_email: email,
+          attachment: 'data:application/pdf;base64,' + base64
+        });
+
+        btn.textContent = '✓ Check your inbox!';
+        input.value = '';
+        setTimeout(() => {
+          btn.textContent = 'SEND ME THE HOOKS →';
+          btn.disabled = false;
+        }, 4000);
+      } catch (err) {
+        console.error(err);
+        btn.textContent = 'Error — please try again';
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
